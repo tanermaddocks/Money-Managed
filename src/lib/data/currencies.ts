@@ -1,6 +1,23 @@
 // Data sourced: https://gist.github.com/ksafranski/2973986
 
-export const currencyData = {
+import { Key } from "react";
+import { string, symbol } from "zod";
+
+interface CurrencyDataEntry {
+  symbol: string;
+  name: string;
+  symbol_native: string;
+  decimal_digits: number;
+  rounding: number;
+  code: string;
+  name_plural: string;
+}
+
+interface CurrencyDataMap {
+  [currencyCode: string]: CurrencyDataEntry;
+}
+
+export const currencyData: CurrencyDataMap = {
   USD: {
     symbol: "$",
     name: "US Dollar",
@@ -1074,4 +1091,4 @@ export const currencyData = {
   },
 };
 
-export const currencyCodes = Object.keys(currencyData)
+export const currencyCodes: string[] = Object.keys(currencyData);
