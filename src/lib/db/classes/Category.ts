@@ -1,8 +1,13 @@
-import {Base, TimeStamps} from "@typegoose/typegoose/lib/defaultClasses"
-import * as typegoose from "@typegoose/typegoose"
+import { Base, TimeStamps } from "@typegoose/typegoose/lib/defaultClasses";
+import { mongoose, prop } from "@typegoose/typegoose";
 
 export class Category extends TimeStamps implements Base {
- public _id!: typegoose.mongoose.Types.ObjectId;
- public id!: string;
+  public _id!: mongoose.Types.ObjectId;
+  public id!: string;
 
+  @prop({ type: String, maxlength: 200 })
+  public description?: string;
+
+  @prop({ type: String, required: true, maxlength: 50 })
+  public title!: string;
 }
