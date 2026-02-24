@@ -10,4 +10,7 @@ export class Category extends TimeStamps implements Base {
 
   @prop({ type: String, required: true, maxlength: 50 })
   public title!: string;
+
+  @prop({type: Boolean, default: false})
+  public global!: boolean
 }

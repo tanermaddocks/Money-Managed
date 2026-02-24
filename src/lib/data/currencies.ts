@@ -1,8 +1,5 @@
 // Data sourced: https://gist.github.com/ksafranski/2973986
 
-import { Key } from "react";
-import { string, symbol } from "zod";
-
 interface CurrencyDataEntry {
   symbol: string;
   name: string;

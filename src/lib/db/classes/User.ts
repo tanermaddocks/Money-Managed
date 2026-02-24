@@ -23,5 +23,5 @@ export class User extends TimeStamps implements Base {
   public customCategories?: Ref<Category>[];
 
   @prop({ type: String, required: true, enum: currencyCodes })
-  public defaultCurrency?: (typeof currencyCodes)[number];
+  public defaultCurrency?: string;
 }
