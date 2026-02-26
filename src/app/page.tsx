@@ -17,9 +17,6 @@ export default async function Home() {
     );
 
   return (
-    <div>
-      <p>You are no signed in</p>
       <LoginButton />
-    </div>
   );
 }
