@@ -1,27 +1,30 @@
 import { Base, TimeStamps } from "@typegoose/typegoose/lib/defaultClasses";
 import { prop, mongoose, Ref } from "@typegoose/typegoose";
-import { Category } from "@/src/lib/db/classes/Category";
 import { currencyCodes } from "@/src/lib/data/currencies";
+import { defaultCategories } from "@/src/lib/data/defaultCategories";
 
 export class User extends TimeStamps implements Base {
   public _id!: mongoose.Types.ObjectId;
   public id!: string;
 
   @prop({
+    type: String,
     required: true,
     unique: true,
-    match: /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/,
   })
   public email!: string;
-  // other auth info to be determined after setup of NextAuth
+
+  @prop({ type: String, required: true, minlength: 2, maxlength: 100 })
+  public username!: string;
 
   @prop({
-    type: () => [mongoose.Types.ObjectId],
-    ref: () => Category,
-    default: [],
+    type: () => [String],
+    minlength: 2,
+    maxlength: 20,
+    default: defaultCategories,
   })
-  public customCategories?: Ref<Category>[];
+  public categories!: string[];
 
-  @prop({ type: String, required: true, enum: currencyCodes })
+  @prop({ type: String, default: "AUD", enum: currencyCodes })
   public defaultCurrency?: string;
 }

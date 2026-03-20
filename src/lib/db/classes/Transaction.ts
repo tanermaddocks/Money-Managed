@@ -1,6 +1,5 @@
 import { Base, TimeStamps } from "@typegoose/typegoose/lib/defaultClasses";
 import { mongoose, prop, Ref } from "@typegoose/typegoose";
-import { Category } from "@/src/lib/db/classes/Category";
 import { currencyCodes } from "@/src/lib/data/currencies";
 import { User } from "@/src/lib/db/classes/User";
 
@@ -9,11 +8,12 @@ export class Transaction extends TimeStamps implements Base {
   public id!: string;
 
   @prop({
-    type: mongoose.Types.ObjectId,
-    ref: () => Category,
+    type: String,
     required: true,
+    minlength: 2,
+    maxlength: 20,
   })
-  public category!: Ref<Category>;
+  public category!: String;
 
   @prop({ type: String, required: true, enum: currencyCodes })
   public currency!: string;
@@ -21,8 +21,8 @@ export class Transaction extends TimeStamps implements Base {
   @prop({ type: String, required: true })
   public date!: Date;
 
-  @prop({ type: String, maxlength: 100, trim: true })
-  public description?: string; // max length: 100, trim: true
+  @prop({ type: String, minlength: 2, maxlength: 100, trim: true })
+  public description?: string;
 
   @prop({ type: String, required: true, enum: ["income", "expense"] })
   public type!: string;
